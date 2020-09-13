@@ -5,7 +5,6 @@ from urllib.request import urlopen, urlretrieve, quote
 
 N = 300
 
-
 # 画像のURLを取得する関数
 def get_image_url_list(query):
     endpoint = 'https://imagesearch.excite.co.jp/'
