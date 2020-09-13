@@ -66,7 +66,7 @@ def download_image(img_url_list, query, save_name):
             error_url_list.append(img_url)
             error_cnt += 1
 
-            print('[Error] {query} {id}/{N} {img_url}')
+            print(f'[Error] {query} {id}/{N} {img_url}')
         id += 1
 
     print(f'[Result] {query} success:{success_cnt - error_cnt}/{success_cnt + error_cnt}')
