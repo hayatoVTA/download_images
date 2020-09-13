@@ -3,7 +3,7 @@ import time
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, urlretrieve, quote
 
-N = 100
+N = 300
 
 
 # 画像のURLを取得する関数
