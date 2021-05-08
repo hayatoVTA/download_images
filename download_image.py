@@ -1,22 +1,24 @@
+# -*- coding: utf-8 -*-
 import os
 import time
 import argparse
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, urlretrieve, quote
 
-N = 50
+N = 0
 
 # パーサーを作る
 parser = argparse.ArgumentParser(
         prog='test.py', # プログラム名
         usage='【 利用方法 】', # プログラムの利用方法
-        description='ご利用いただくにはスペース区切りで次のコマンドを入力してください => python download_image.py -l 保存したい画像の名前 作成するフォルダ名', # 引数のヘルプの前に表示
+        description='ご利用いただくにはスペース区切りで次のコマンドを入力してください => python download_image.py -l 保存したい画像の名前 作成するフォルダ名 --count 保存回数 (保存回数は20の倍数のみ選択可能, デフォルト=20)', # 引数のヘルプの前に表示
         #epilog='end', # 引数のヘルプの後で表示
         add_help=True, # -h/–help オプションの追加
         )
 
 # 引数の追加
-parser.add_argument('-l','--nargs', nargs='+')
+parser.add_argument('-l','--query', nargs='+')
+parser.add_argument('-c', '--count', default=20)
 
 # 画像のURLを取得する関数
 def get_image_url_list(query):
@@ -80,16 +82,20 @@ def download_image(img_url_list, query, save_name):
 # 引数を解析し、0枚ではないときに実行可能
 # 入力コードが間違っている際は説明がでます
 for _, value in parser.parse_args()._get_kwargs():
-    if value is not None:
-        keyword = value
-
-        if N != 0:
-            N = (int(N / 20) + 1) * 20
-            print('[Debug] Convert Number Of image.')
-            print(keyword)
-            # 画像のURLを取得
-            img_url_list = get_image_url_list(keyword[0])
-            # 画像をダウンロード
-            download_image(img_url_list, keyword[0], keyword[1])
+    if _ == 'count':
+        N += int(value)
     else:
-      print('使い方はヘルプを参照してください(python download_image.py -hで実行するとhelpを参照できます)')
+        if value is not None:
+            keyword = value
+
+            if N != 0:
+                N = (int(N / 20) + 1) * 20
+                print('[Debug] Convert Number Of image.')
+                print(f'[検索クエリ]：{keyword[0]}')
+                print(f'[保存先ディレクトリ]：{keyword[1]}')
+                # 画像のURLを取得
+                img_url_list = get_image_url_list(keyword[0])
+                # 画像をダウンロード
+                download_image(img_url_list, keyword[0], keyword[1])
+        else:
+            print('使い方はヘルプを参照してください(python download_image.py -hで実行するとhelpを参照できます)')
