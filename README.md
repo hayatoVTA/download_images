@@ -1,13 +1,19 @@
 # download_images_script
 This program to save images by scraping from excite image search.（エキサイト画像検索からスクレイピングして画像を保存する）
 
-1. [概要](#anchor1)
-1. [使い方](#anchor2)
-1. [詳細](#anchor3)
-1. [English](#anchor4)
+1. [日本語](#japanese)
+    1. [概要](#anchor1)
+    1. [使い方](#anchor2)
+    1. [詳細](#anchor3)
+1. [English](#english)
+    1. [Overview](#anchor4)
+     1. [Using](#anchor5)
+    1. [Details](#anchor6)
+1. [Security Policy](#security)
+
+# 日本語ドキュメント<a id="japanese"></a>
 
 ※renewal_scrapingブランチの内容が最新です。（Version 0.2 on May 9 2021）<br>
-また、新しい方のコードでは利用方法が異なります。ほとんどコマンドラインで操作できるようになっているのでそちらをお勧めしてます。
 
 ## 概要<a id="anchor1"></a>
 
@@ -92,3 +98,93 @@ $ python download_image.py -h
 [Warning] URL Is Insufficient.
 [Failed URL] https://test.jpg
 ```
+
+# English Document <a id="english"></a>
+
+__Please note that I am not good at English😂__
+
+* The contents of the renewal_scraping branch are the latest. (Version 0.2 on May 9 2021)<br>
+
+## Overview <a id="anchor4"></a>
+
+__It is a script which can automatically scrape and save images and save them in any folder.__
+
+### Supported OS
+
+- macOS Catalina 10.15.7 (Already Checked)<br>
+(If you can confirm with other OS and version, please report it to help improve the service)
+
+### Directory structure
+
+```
+./
+├── download_image.py
+├── requirements.txt
+└── image/
+    └── any folder/
+```
+
+## Using<a id="anchor5">
+
+### 1: Create a virtual environment (you can skip it)
+```
+$ python -m venv env
+$ source env/bin/activate
+```
+
+### 2:Installing a package 
+```
+$ pip install -r requirements.txt
+```
+
+### 3: Execute the script
+- Specify the name of the images you want to search and the directory name in the query<br>（First of all, It doesn't need to be created in advance because it will automatically create a folder in the image folder）
+
+```
+$ python download_image.py -q [The word to search] [Any directory name(Anything OK)]
+```
+
+- The default number of saved images is 40, but you can specify the number in multiples of 20.
+
+```
+$ python download_image.py -q [The word to search] [Any directory name(Anything OK)] -c [multiples of 20)]
+```
+
+- See the Help and All command
+```
+$ python download_image.py -h
+```
+
+## Details<a id="anchor6">
+
+### How to see the screen
+
+- [Debug] ・・・ Starting message with script
+- [検索クエリ] ・・・ The word to search
+- [保存先ディレクトリ] ・・・ Any directory nam
+- [ダウンロード回数] ・・・ The number of save iamges
+- [Download] word 1/40 ・・・ You can grasp the download status
+- [Error] ・・・ It will tell you the image where the error occurred for some reason
+- [Result] word success:40/44 ・・・ Result
+- [Warning] URL Is Insufficient. ・・・ It will tell you the error that could not be saved
+- [Failed URL] url ・・・ Show URLs that could not be saved
+
+```
+[Debug] Convert Number Of image.
+[検索クエリ]：佐藤優樹
+[保存先ディレクトリ]：masakisato
+[ダウンロード回数]：40
+[Download] 佐藤優樹 1/40
+[Error] 佐藤優樹 2/40 https://test.jpg
+[Download] 佐藤優樹 3/40
+[Download] 佐藤優樹 4/40
+・・・
+〜〜〜〜〜Omission〜〜〜〜〜
+・・・
+[Result] 佐藤優樹 success:40/44
+[Warning] URL Is Insufficient.
+[Failed URL] https://test.jpg
+```
+
+# Security <a id="security">
+Please see the [Security Policy](https://github.com/hayatoVTA/download_images/security/policy/)
