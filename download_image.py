@@ -17,7 +17,7 @@ parser = argparse.ArgumentParser(
         )
 
 # 引数の追加
-parser.add_argument('-l','--query', nargs='+')
+parser.add_argument('-q','--query', nargs='+')
 parser.add_argument('-c', '--count', default=20)
 
 # 画像のURLを取得する関数
